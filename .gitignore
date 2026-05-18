@@ -1,0 +1,24 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Local dev
+serve.ps1
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Build
+dist/
+.next/
+.turbo/
+
+# Supabase
+supabase/.branches
+supabase/.temp
