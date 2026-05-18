@@ -115,6 +115,35 @@ footer{background:var(--p900);border-top:1px solid var(--border);padding:2rem;}
   .editor{position:static;}
   .story-container{max-width:280px;}
 }
+
+/* ═══════ MOBILE OPTIMIZATION ═══════ */
+html{-webkit-text-size-adjust:100%}
+body{overflow-x:hidden}
+*{-webkit-tap-highlight-color:rgba(245,166,35,0.15)}
+
+@media (max-width:768px){
+  nav{padding:0 1rem}
+  input[type="text"],input[type="email"],input[type="password"],
+  input[type="date"],input[type="number"],input[type="search"],
+  textarea,select,.field-input{font-size:16px !important}
+  .btn-orange:hover,.btn-outline:hover,.btn-white:hover{
+    transform:none !important;box-shadow:none !important}
+}
+
+@media (max-width:480px){
+  .page{padding:80px 1rem 3rem !important;gap:2rem !important}
+  .story-container{max-width:320px !important}
+  .nav-back{padding:8px 12px !important;font-size:12px !important}
+  /* Share row — 2 cols on small phones (was 3) */
+  .share-row{grid-template-columns:repeat(2,1fr) !important}
+  /* Field inputs touch-friendly */
+  .field-input{padding:14px 14px !important;min-height:48px}
+  /* Buttons */
+  .btn-orange,.btn-outline,.btn-white{
+    padding:14px 24px;font-size:14px;min-height:48px}
+  /* Template picker thumbs — touch */
+  .template-picker button,.template-thumb{min-height:48px;min-width:48px}
+}
 </style>
 </head>
 <body>
