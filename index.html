@@ -1009,7 +1009,7 @@ body.nav-locked{overflow:hidden}
       <!-- Location + Date (optional, grid) -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;">
         <div>
-          <label style="font-family:'Ubuntu',sans-serif;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);display:block;margin-bottom:6px;font-weight:600;">ლოკაცია <span style="color:#F5A623;font-weight:500;text-transform:none;letter-spacing:0;font-size:11px;">· nebay.</span></label>
+          <label style="font-family:'Ubuntu',sans-serif;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);display:block;margin-bottom:6px;font-weight:600;">ლოკაცია <span style="color:#F5A623;font-weight:500;text-transform:none;letter-spacing:0;font-size:11px;">· ნებაყოფლობითი</span></label>
           <div style="position:relative;">
             <input id="f-location" type="text" placeholder="თბილისი, ძველი ქალაქი…"
               style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:11px 38px 11px 14px;font-family:'Noto Sans Georgian',sans-serif;font-size:14px;color:#fff;outline:none;transition:border-color 0.2s;"
@@ -1021,20 +1021,20 @@ body.nav-locked{overflow:hidden}
           </div>
         </div>
         <div>
-          <label style="font-family:'Ubuntu',sans-serif;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);display:block;margin-bottom:6px;font-weight:600;">თარიღი <span style="color:#F5A623;font-weight:500;text-transform:none;letter-spacing:0;font-size:11px;">· nebay.</span></label>
+          <label style="font-family:'Ubuntu',sans-serif;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);display:block;margin-bottom:6px;font-weight:600;">თარიღი <span style="color:#F5A623;font-weight:500;text-transform:none;letter-spacing:0;font-size:11px;">· ნებაყოფლობითი</span></label>
           <input id="f-date" type="date"
             style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:11px 14px;font-family:'Noto Sans Georgian',sans-serif;font-size:14px;color:#fff;outline:none;color-scheme:dark;transition:border-color 0.2s;"
             onfocus="this.style.borderColor='#F5A623'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
         </div>
       </div>
 
-      <!-- Public-only notice -->
-      <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.2);border-radius:10px;margin-bottom:1.5rem;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <div style="font-family:'Noto Sans Georgian',sans-serif;font-size:12.5px;color:rgba(255,255,255,0.75);line-height:1.5;">
-          <strong style="color:#fff;font-weight:600;">საჯაროდ გასაჯაროება.</strong> ფოტო გამოჩნდება არქივში — ყველა იხილავს.
-        </div>
-      </div>
+      <!-- Terms agreement checkbox -->
+      <label for="f-terms" style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:10px;margin-bottom:1.5rem;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+        <input type="checkbox" id="f-terms" style="width:18px;height:18px;margin-top:1px;accent-color:#F5A623;cursor:pointer;flex-shrink:0;">
+        <span style="font-family:'Noto Sans Georgian',sans-serif;font-size:12.5px;color:rgba(255,255,255,0.85);line-height:1.55;">
+          გავეცანი და ვეთანხმები <a href="privacy-policy.html" target="_blank" style="color:#F5A623;text-decoration:underline;text-underline-offset:2px;">კომპანიის კონფიდენციალურობის პოლიტიკას</a> და წესებსა და პირობებს
+        </span>
+      </label>
 
       <!-- Submit -->
       <button id="submit-btn" onclick="submitUpload()"
@@ -1154,8 +1154,20 @@ function showPreviews(files) {
 
 function submitUpload() {
   if (!selectedFiles.length) {
-    document.getElementById('drop-zone').style.borderColor = '#E24B4A';
-    setTimeout(() => document.getElementById('drop-zone').style.borderColor = 'rgba(28,26,22,0.2)', 1200);
+    const dz = document.getElementById('drop-zone');
+    dz.style.borderColor = '#E24B4A';
+    setTimeout(() => dz.style.borderColor = 'rgba(255,255,255,0.15)', 1200);
+    return;
+  }
+  const terms = document.getElementById('f-terms');
+  if (terms && !terms.checked) {
+    const wrap = terms.closest('label');
+    wrap.style.borderColor = '#E24B4A';
+    wrap.style.background = 'rgba(226,75,74,0.08)';
+    setTimeout(() => {
+      wrap.style.borderColor = 'rgba(255,255,255,0.1)';
+      wrap.style.background = 'rgba(255,255,255,0.03)';
+    }, 1500);
     return;
   }
   const btn = document.getElementById('submit-btn');
