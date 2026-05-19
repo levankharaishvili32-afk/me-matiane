@@ -110,6 +110,26 @@ footer{background:var(--p900);border-top:1px solid var(--border);padding:2rem;}
 .editor,.preview-wrap{animation:fadeUp 0.5s ease both}
 .preview-wrap{animation-delay:0.15s}
 
+/* Share steps list (4 numbered) */
+.share-steps{list-style:none;padding:0;margin:2rem 0;display:flex;flex-direction:column;gap:10px}
+.share-steps li{display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:100px;padding:8px 8px 8px 8px;min-height:48px;
+  transition:background 0.2s,border-color 0.2s}
+.share-steps li:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.14)}
+.share-steps .step-num{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-size:14px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,#F5A623,#E53A2F)}
+.share-steps li:nth-child(2) .step-num{background:linear-gradient(135deg,#E53A2F,#CC2366)}
+.share-steps li:nth-child(3) .step-num{background:linear-gradient(135deg,#CC2366,#7B44C8)}
+.share-steps li:nth-child(4) .step-num{background:linear-gradient(135deg,#7B44C8,#5B2DAA)}
+.share-steps .step-text{font-family:var(--geo);font-size:14px;color:rgba(255,255,255,0.9);line-height:1.4}
+@media(max-width:480px){
+  .share-steps .step-text{font-size:13px}
+}
+
 @media(max-width:900px){
   .page{grid-template-columns:1fr;padding-top:80px;}
   .editor{position:static;}
@@ -165,8 +185,15 @@ body{overflow-x:hidden}
   <!-- LEFT: EDITOR -->
   <div class="editor">
     <div class="sec-label">გამოწვევა</div>
-    <h1>გაუზიარე<br><span>ისტორია</span></h1>
-    <p>ატვირთე შენი ფოტო, აირჩიე სტილი — გენერირდება Instagram Story-ისთვის მზად ბარათი.</p>
+    <h1>გააზიარე შენი<br><span>მობილური ისტორია</span></h1>
+
+    <!-- 4 numbered steps -->
+    <ol class="share-steps">
+      <li><span class="step-num">1</span><span class="step-text">ატვირთე შენი ფოტო</span></li>
+      <li><span class="step-num">2</span><span class="step-text">აირჩიე სტილი — 4 ვარიანტი</span></li>
+      <li><span class="step-num">3</span><span class="step-text">გადმოწერე 1080×1920px Story ბარათი</span></li>
+      <li><span class="step-num">4</span><span class="step-text">გაუზიარე Instagram-ზე, WhatsApp-ზე</span></li>
+    </ol>
 
     <!-- TEMPLATES -->
     <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;font-family:var(--sans);font-weight:700;">სტილი</div>
@@ -269,7 +296,6 @@ body{overflow-x:hidden}
     <ul class="footer-links">
       <li><a href="how-it-works.html">შესახებ</a></li>
       <li><a href="gallery.html">არქივი</a></li>
-      <li><a href="mosaic.html">მოზაიკა</a></li>
     </ul>
     <div class="powered-badge">me.matiane.ge &nbsp;·&nbsp; <strong>Powered by Alta.Ge</strong></div>
   </div>
