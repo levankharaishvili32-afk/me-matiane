@@ -87,7 +87,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 
 /* RIGHT — PREVIEW */
 .preview-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.story-container.stack-card.front{
+  /* inherits .stack-card sizing; canvas fills it */
+  border-radius:20px;
+}
 .story-container{
+  /* fallback (rare — when used outside stack) */
   width:100%;max-width:360px;
   aspect-ratio:9/16;
   position:relative;border-radius:20px;overflow:hidden;
@@ -164,6 +169,119 @@ body{overflow-x:hidden}
   /* Template picker thumbs — touch */
   .template-picker button,.template-thumb{min-height:48px;min-width:48px}
 }
+
+
+/* ═══════ UI REDESIGN ═══════ */
+@font-face {
+  font-family: 'Matiane';
+  src: url('assets/font.ttc') format('collection'),
+       url('assets/font.ttc') format('truetype-collection'),
+       url('assets/font.ttc') format('truetype');
+  font-weight: 400 900; font-display: swap;
+}
+.alta-fab {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #2D1B4E; display: flex; align-items: center; justify-content: center;
+  z-index: 100; box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+  cursor: pointer; text-decoration: none; overflow: hidden; transition: transform 0.2s;
+}
+.alta-fab:hover { transform: scale(1.05); }
+.alta-fab img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 480px) { .alta-fab { width: 48px; height: 48px; bottom: 16px; right: 16px; } }
+
+/* Stacked phone preview cards — 3 angled mockups */
+.story-stack {
+  position: relative;
+  width: 100%; max-width: 460px; margin: 0 auto;
+  aspect-ratio: 1 / 1.1;
+  display: flex; align-items: center; justify-content: center;
+}
+.story-stack .stack-card {
+  position: absolute; width: 56%;
+  aspect-ratio: 9/16;
+  border-radius: 24px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.story-stack .stack-card.back-left { transform: translateX(-44%) rotate(-12deg); opacity: 0.85; z-index: 1; }
+.story-stack .stack-card.back-right { transform: translateX(44%) rotate(12deg); opacity: 0.85; z-index: 1; }
+.story-stack .stack-card.front { transform: translateY(-4%) rotate(0deg); z-index: 2; }
+.story-stack .stack-card.back-left:hover { transform: translateX(-50%) rotate(-15deg) translateY(-2%); }
+.story-stack .stack-card.back-right:hover { transform: translateX(50%) rotate(15deg) translateY(-2%); }
+.stack-card-bg { position: absolute; inset: 0; }
+.stack-card-bg.purple { background: linear-gradient(160deg, #5B2DAA, #2D1265); }
+.stack-card-bg.red { background: linear-gradient(160deg, #E53A2F, #B02922); }
+.stack-card-bg.orange { background: linear-gradient(160deg, #F5A623, #C8841C); }
+.stack-card-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  padding: 14px 14px 22px;
+  color: #fff;
+}
+.stack-alta-pill {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.92); color: #2D1265;
+  font-family: var(--sans); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 5px 10px; border-radius: 100px;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.stack-alta-pill::before {
+  content: ''; width: 9px; height: 9px; border-radius: 50%;
+  background: conic-gradient(from 0deg, #F5A623, #E53A2F, #CC2366, #5B2DAA, #F5A623);
+}
+.stack-photo {
+  flex: 1; margin-top: 10px; border-radius: 6px;
+  overflow: hidden; background: rgba(0,0,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.stack-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.stack-title {
+  font-family: var(--geo); font-size: 14px; font-weight: 700;
+  text-align: center; margin-top: 8px; line-height: 1.2;
+}
+.stack-footer {
+  text-align: center; margin-top: 6px;
+  font-family: var(--sans); font-size: 7px; font-weight: 700;
+  letter-spacing: 0.08em; opacity: 0.85;
+}
+
+/* New share-card hero CTA buttons */
+.share-cta-row {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem;
+}
+.btn-share-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, #8A4FD8, #5B2DAA);
+  color: #fff; font-family: var(--geo); font-size: 14px; font-weight: 600;
+  padding: 14px 24px; border-radius: 100px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 6px 18px rgba(123, 68, 200, 0.4);
+}
+.btn-share-primary:hover {
+  background: linear-gradient(135deg, #9A60E8, #6D3FBE);
+  transform: translateY(-1px);
+}
+.btn-share-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.88);
+  font-family: var(--geo); font-size: 14px; font-weight: 500;
+  padding: 14px 24px; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.18);
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-share-secondary:hover {
+  border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
+}
+
+@media (max-width: 480px) {
+  .story-stack { max-width: 320px; }
+  .btn-share-primary, .btn-share-secondary {
+    flex: 1; justify-content: center; min-height: 48px;
+  }
+}
 </style>
 </head>
 <body>
@@ -194,6 +312,18 @@ body{overflow-x:hidden}
       <li><span class="step-num">3</span><span class="step-text">გადმოწერე 1080×1920px Story ბარათი</span></li>
       <li><span class="step-num">4</span><span class="step-text">გაუზიარე Instagram-ზე, WhatsApp-ზე</span></li>
     </ol>
+
+    <!-- Hero CTAs -->
+    <div class="share-cta-row">
+      <button class="btn-share-primary" onclick="document.querySelector('#tpl-row')?.scrollIntoView({behavior:'smooth'})">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        ბარათის შექმნა
+      </button>
+      <button class="btn-share-secondary" type="button" onclick="document.getElementById('photo-file')?.click()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        ფოტოს ატვირთვა
+      </button>
+    </div>
 
     <!-- TEMPLATES -->
     <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;font-family:var(--sans);font-weight:700;">სტილი</div>
@@ -271,17 +401,36 @@ body{overflow-x:hidden}
     </div>
   </div>
 
-  <!-- RIGHT: PREVIEW -->
+  <!-- RIGHT: 3 STACKED PREVIEW CARDS -->
   <div class="preview-wrap">
-    <div style="font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem;font-family:var(--sans);font-weight:700;">Preview · Instagram Story (9:16)</div>
-    <div class="story-container">
-      <canvas id="story-canvas" width="1080" height="1920"></canvas>
+    <div class="story-stack">
+      <!-- Back left (red, decorative) -->
+      <div class="stack-card back-left">
+        <div class="stack-card-bg red"></div>
+        <div class="stack-card-content">
+          <div class="stack-alta-pill">ALTA</div>
+          <div class="stack-photo"></div>
+          <div class="stack-title">ჩემი მობილური<br>ისტორია</div>
+          <div class="stack-footer">ME.MATIANE.COM.GE · POWERED BY ALTA.GE</div>
+        </div>
+      </div>
+      <!-- Back right (orange, decorative) -->
+      <div class="stack-card back-right">
+        <div class="stack-card-bg orange"></div>
+        <div class="stack-card-content">
+          <div class="stack-alta-pill">ALTA</div>
+          <div class="stack-photo"></div>
+          <div class="stack-title">ჩემი მობილური<br>ისტორია</div>
+          <div class="stack-footer">ME.MATIANE.COM.GE · POWERED BY ALTA.GE</div>
+        </div>
+      </div>
+      <!-- Front (live canvas — preserves Canvas generator behaviour) -->
+      <div class="stack-card front story-container">
+        <canvas id="story-canvas" width="1080" height="1920"></canvas>
+      </div>
     </div>
-    <div class="format-hint">
+    <div class="format-hint" style="margin-top:1rem;">
       <span>1080 × 1920px</span> · PNG · Instagram Story მზად
-    </div>
-    <div style="margin-top:1rem;font-size:12px;color:rgba(255,255,255,0.2);text-align:center;max-width:280px;line-height:1.6;">
-      ბარათს ემატება <strong style="color:rgba(255,255,255,0.4);">#ისტორიაარუნდაწაიშალოს</strong> და <strong style="color:rgba(255,255,255,0.4);">me.matiane.ge</strong>
     </div>
   </div>
 
@@ -607,5 +756,9 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 });
 window.addEventListener('resize', ()=>renderCard());
 </script>
+<!-- Floating Alta logo -->
+<a href="https://alta.ge" target="_blank" rel="noopener" class="alta-fab" aria-label="Alta.Ge">
+  <img src="assets/alta-logo.jpg" alt="Alta">
+</a>
 </body>
 </html>
