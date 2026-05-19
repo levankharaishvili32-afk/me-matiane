@@ -701,6 +701,105 @@ body.nav-locked{overflow:hidden}
   #mini-canvas{max-width:100%}
 }
 
+/* ════════ MOBILE V2 — CHALLENGE SECTION + STACKED CARDS ════════ */
+
+/* Black challenge section — stack on tablet+ */
+@media (max-width:900px){
+  section[style*="background:#000"] > div[style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr !important;
+    gap:2rem !important;
+    text-align:center;
+  }
+  section[style*="background:#000"] h2{
+    font-size:clamp(28px,7vw,44px) !important;
+    text-align:center;
+  }
+  section[style*="background:#000"] p{
+    margin-left:auto;margin-right:auto;
+  }
+  section[style*="background:#000"] > div > div:first-child{
+    text-align:center;
+  }
+  section[style*="background:#000"] > div > div:first-child > div[style*="display:inline-flex"]{
+    /* keep eyebrow as is */
+  }
+  section[style*="background:#000"] > div > div:first-child > div[style*="display:flex"]:last-child{
+    justify-content:center;
+  }
+  /* Memat cards — smaller stacked */
+  .memat-card{
+    transform-origin:center !important;
+  }
+  .memat-card[style*="rotate(-12deg)"]{
+    transform:translate(-50%,-50%) rotate(-10deg) translateX(-80px) scale(0.85) !important;
+    width:180px !important;
+  }
+  .memat-card[style*="rotate(12deg)"]{
+    transform:translate(-50%,-50%) rotate(10deg) translateX(80px) scale(0.85) !important;
+    width:180px !important;
+  }
+  .memat-card:not([style*="rotate"]){
+    width:200px !important;
+  }
+  section[style*="background:#000"] > div > div:nth-child(2){
+    height:480px !important;
+  }
+}
+
+@media (max-width:600px){
+  /* Stack memat cards even tighter for small phones */
+  .memat-card[style*="rotate(-12deg)"]{
+    transform:translate(-50%,-50%) rotate(-8deg) translateX(-55px) scale(0.72) !important;
+  }
+  .memat-card[style*="rotate(12deg)"]{
+    transform:translate(-50%,-50%) rotate(8deg) translateX(55px) scale(0.72) !important;
+  }
+  .memat-card:not([style*="rotate"]){
+    width:180px !important;
+  }
+  section[style*="background:#000"] > div > div:nth-child(2){
+    height:380px !important;
+  }
+}
+
+@media (max-width:480px){
+  /* Hero text padding for tiny phones */
+  .hero-content > div:first-child{
+    padding:3rem 1rem 2rem !important;
+  }
+  .hero-title-big{
+    font-size:clamp(42px,13vw,68px) !important;
+  }
+  .hero-title-small{
+    font-size:clamp(22px,5vw,30px) !important;
+  }
+  .hero-sub{
+    font-size:13px;line-height:1.7;
+  }
+  /* Hero CTAs full width stacked */
+  .hero-cta{
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:8px;
+  }
+  .hero-cta a, .hero-cta button{
+    width:100% !important;
+    justify-content:center !important;
+  }
+  /* Black challenge section padding */
+  section[style*="background:#000"]{
+    padding:60px 1rem !important;
+  }
+  /* Stacked steps in challenge */
+  section[style*="background:#000"] div[style*="flex-direction:column"][style*="gap:3px"]{
+    margin-bottom:2rem !important;
+  }
+  section[style*="background:#000"] div[style*="padding:12px 16px"]{
+    padding:10px 12px !important;
+    font-size:13px;
+  }
+}
+
 /* Landscape phone — extra tight */
 @media (max-width:900px) and (orientation:landscape) and (max-height:500px){
   .hero{min-height:auto;padding:5rem 1rem 2rem}
@@ -1059,11 +1158,52 @@ body.nav-locked{overflow:hidden}
 <style>
 #upload-modal.open { display: flex !important; }
 #upload-modal input::placeholder, #upload-modal textarea::placeholder { color: rgba(255,255,255,0.35); }
-@media (max-width:480px) {
+@media (max-width:600px) {
   #upload-modal { padding: 0.5rem !important; }
-  #upload-modal-inner { max-height: 95vh !important; }
+  #upload-modal-inner { max-height: 95vh !important; border-radius: 14px !important; }
   #upload-modal-inner > div:nth-child(2),
   #upload-modal-inner > div:nth-child(3) { padding-left:1rem !important; padding-right:1rem !important; }
+  /* iOS zoom prevention */
+  #upload-modal input[type="text"],
+  #upload-modal input[type="email"],
+  #upload-modal input[type="password"],
+  #upload-modal input[type="date"],
+  #upload-modal textarea {
+    font-size: 16px !important;
+  }
+  #upload-modal #f-title, #upload-modal #f-location, #upload-modal #f-date, #upload-modal #f-desc {
+    padding: 13px 14px !important;
+  }
+  /* Drop zone smaller on mobile */
+  #drop-zone {
+    padding: 1.5rem 1rem !important;
+  }
+  /* Submit button bigger touch target */
+  #submit-btn {
+    padding: 16px !important;
+    min-height: 52px;
+    font-size: 15px !important;
+  }
+  /* Terms checkbox box more spacious */
+  #f-terms { min-width: 22px; min-height: 22px; }
+  /* Modal header */
+  #upload-modal-inner > div:nth-child(2) {
+    padding: 1.25rem 1rem 0.75rem !important;
+  }
+  #upload-modal-inner > div:nth-child(2) > div > div:nth-child(2) {
+    font-size: 17px !important;
+  }
+}
+
+/* Auth modal mobile (same theme, also in index.html) */
+@media (max-width:600px) {
+  #auth-modal { padding: 0.5rem !important; }
+  #auth-inner { max-height: 95vh !important; border-radius: 14px !important; }
+  #auth-inner input[type="text"],
+  #auth-inner input[type="email"],
+  #auth-inner input[type="password"] {
+    font-size: 16px !important;
+  }
 }
 </style>
 

@@ -277,19 +277,40 @@ footer{
   .profile-stats{width:100%;}
   .photo-grid{grid-template-columns:repeat(3,1fr);gap:3px;}
 }
-@media(max-width:480px){
-  .profile-hero{padding:100px 1rem 2rem;}
-  .profile-avatar{width:90px;height:90px;font-size:32px;}
+@media(max-width:600px){
+  .profile-hero{padding:90px 1rem 1.5rem;}
+  .profile-hero-inner{gap:1rem;align-items:center;text-align:center;}
+  .profile-avatar{width:80px;height:80px;font-size:28px;}
+  .profile-name{font-size:26px;}
+  .profile-greeting{font-size:10px;}
+  .profile-meta{font-size:12px;}
+  .profile-info{flex:none;}
+  .profile-stats{
+    width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+  }
+  .stat-block{flex:none;min-width:0;padding:0.65rem 0.4rem;}
+  .stat-num{font-size:22px;}
+  .stat-lbl{font-size:9px;letter-spacing:0.06em;}
   .photo-grid{grid-template-columns:repeat(2,1fr);gap:3px;}
-  .actions-bar{padding:1.5rem 1rem 1rem;}
+  .actions-bar{padding:1.25rem 1rem 0.75rem;}
+  .section-title{font-size:16px;}
   .photo-grid-section{padding:0 1rem 3rem;}
   .alta-fab{width:48px;height:48px;bottom:16px;right:16px;}
-  .btn-upload{padding:14px 24px;min-height:48px;}
+  .btn-upload{padding:12px 16px;min-height:44px;font-size:13px;flex:1;justify-content:center;}
   input[type="text"],input[type="email"],input[type="password"],
   input[type="date"],input[type="number"],input[type="search"],
   textarea,select{font-size:16px !important}
-  .stat-num{font-size:24px;}
-  .stat-block{flex:1;min-width:0;padding:0.75rem 0.5rem;}
+  /* Photo card action buttons — always visible on touch */
+  .pgrid-card-actions{opacity:1 !important;background:transparent;}
+  .pgrid-action-btn{width:36px;height:36px;}
+  /* Footer stack */
+  .footer-inner{flex-direction:column;text-align:center;gap:0.5rem;font-size:11px;}
+}
+@media(max-width:380px){
+  .profile-name{font-size:22px;}
+  .photo-grid{grid-template-columns:1fr;gap:6px;}
+  .actions-bar{flex-direction:column;align-items:stretch;}
+  .btn-upload{width:100%;}
 }
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}

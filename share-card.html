@@ -276,11 +276,39 @@ body{overflow-x:hidden}
   border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
 }
 
-@media (max-width: 480px) {
-  .story-stack { max-width: 320px; }
+@media (max-width: 900px) {
+  .story-stack { max-width: 380px; aspect-ratio: 1 / 1; margin-top: 1rem; }
+  .share-cta-row { flex-direction: row; }
+}
+@media (max-width: 600px) {
+  .page { padding: 80px 1rem 3rem !important; gap: 2rem !important; }
+  .editor h1 { font-size: clamp(28px, 8vw, 42px) !important; line-height: 1.1; }
+  .share-steps li { padding: 6px !important; }
+  .share-steps .step-num { width: 28px !important; height: 28px !important; font-size: 13px !important; }
+  .share-steps .step-text { font-size: 12.5px !important; }
+  .story-stack { max-width: 320px; aspect-ratio: 1 / 1.05; }
+  .story-stack .stack-card { width: 60%; }
+  .story-stack .stack-card.back-left { transform: translateX(-38%) rotate(-10deg); }
+  .story-stack .stack-card.back-right { transform: translateX(38%) rotate(10deg); }
   .btn-share-primary, .btn-share-secondary {
     flex: 1; justify-content: center; min-height: 48px;
+    padding: 12px 16px; font-size: 13px;
   }
+  .template-row { gap: 6px !important; }
+  .tpl-btn { padding: 4px !important; }
+  .tpl-preview { aspect-ratio: 9/16 !important; }
+  /* iOS input zoom prevention */
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="date"], input[type="number"], input[type="search"],
+  textarea, select, .field-input {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 380px) {
+  .story-stack { max-width: 280px; }
+  .editor h1 { font-size: 26px !important; }
+  .share-steps li { gap: 8px !important; padding: 4px !important; }
+  .share-steps .step-num { width: 24px !important; height: 24px !important; font-size: 11px !important; }
 }
 </style>
 </head>
